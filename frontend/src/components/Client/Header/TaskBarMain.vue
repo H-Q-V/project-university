@@ -21,7 +21,7 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav mr-auto tnav-left tn-nav">
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <a class="nav-link" href="#">Việc Làm IT</a>
             </li>
             <li class="nav-item">
@@ -48,6 +48,9 @@
                 <div class="dropdown-divider"></div>
                 <a class="dropdown-item" href="#">Something else here</a>
               </div>
+            </li> -->
+            <li class="nav-item" v-for="item in menuItems" :key="item._id">
+              <a class="nav-link" :href="item.link">{{ item.name }}</a>
             </li>
           </ul>
           <ul class="navbar-nav mr-auto my-2 my-lg-0 tnav-right tn-nav">
@@ -100,6 +103,19 @@
 
 <script setup>
 import imgTechJob from "@/assets/img/techjobs_bgb.png";
+import { ref, onMounted } from "vue";
+
+const menuItems = ref([]);
+onMounted(async () => {
+  try {
+    const res = await fetch("http://localhost:3000/api/menu/getAll");
+    const data = await res.json();
+    menuItems.value = data.data;
+    console.log(menuItems.value);
+  } catch (err) {
+    console.log(err);
+  }
+});
 </script>
 
 <style lang="scss" scoped></style>

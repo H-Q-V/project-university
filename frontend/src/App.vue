@@ -7,7 +7,7 @@ import Banner from "./components/Client/Header/Banner.vue";
 <template>
   <TaskBarMain></TaskBarMain>
   <Banner></Banner>
-  <p>hello</p>
+  <!-- <p>hello</p> -->
 </template>
 
 <style scoped>
