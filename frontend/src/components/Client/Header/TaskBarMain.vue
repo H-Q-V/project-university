@@ -96,7 +96,10 @@
       </nav>
     </div>
   </div>
+  
 </template>
+
+
 
 <script setup>
 import imgTechJob from "@/assets/img/techjobs_bgb.png";
