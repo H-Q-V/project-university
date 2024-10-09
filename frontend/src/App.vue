@@ -11,18 +11,6 @@ import JobListings from './components/Client/HomePage/JobListings.vue';
 <template>
   <TaskBarMain></TaskBarMain>
   <Banner></Banner>
-  <Search />
-  <div class="container">
-    <div class="row">
-      <UrgentJobs class="col-md-8" />
-      <JobCategories class="col-md-4" />
-    </div>
-    <div class="row">
-      <JobListings class="col-md-12" /> 
-    </div>
-  </div>
-  
-  
 </template>
 
 <style scoped>

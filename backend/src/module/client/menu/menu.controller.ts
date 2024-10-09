@@ -31,7 +31,7 @@ export class MenuController {
   @Put('/update/:id')
   @UsePipes(new ValidationPipe())
   async update(@Param('id') id: string, @Body() body) {
-    let data = await this.menuService.update(id, body);
+    const data = await this.menuService.update(id, body);
     return {
       success: true,
       code: 200,

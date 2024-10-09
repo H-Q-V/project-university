@@ -5,6 +5,8 @@ import { MenuModule } from './module/client/menu/menu.module';
 //import { AppController } from './app.controller';
 //import { AppService } from './app.service';
 //import { MenuModule } from './menu/menu.module';
+import { AuthModule } from './auth/auth.module';
+// import { AdminController } from './admin/admin.controller';
 
 @Module({
   imports: [
@@ -14,6 +16,7 @@ import { MenuModule } from './module/client/menu/menu.module';
     }),
     MongooseModule.forRoot(process.env.MONGO_URI),
     MenuModule,
+    AuthModule,
   ],
   controllers: [],
   providers: [],
