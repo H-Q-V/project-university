@@ -2,12 +2,15 @@
 import { RouterLink, RouterView } from "vue-router";
 import TaskBarMain from "./components/Client/Header/TaskBarMain.vue";
 import Banner from "./components/Client/Header/Banner.vue";
+import Search from "./components/Client/Header/seach.vue";
+import UrgentJobs from './components/Client/HomePage/UrgentJobs.vue'
+import JobCategories from './components/Client/HomePage/JobCategories.vue'
+import JobListings from './components/Client/HomePage/JobListings.vue';
 </script>
 
 <template>
   <TaskBarMain></TaskBarMain>
   <Banner></Banner>
-  <!-- <p>hello</p> -->
 </template>
 
 <style scoped>
@@ -71,5 +74,7 @@ nav a:first-of-type {
     padding: 1rem 0;
     margin-top: 1rem;
   }
+  
 }
+
 </style>

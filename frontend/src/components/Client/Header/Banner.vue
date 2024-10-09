@@ -21,11 +21,12 @@
       </div>
     </div>
   </div>
+  
 </template>
 
 <script setup>
 import banner from "@/assets/img/banner2.jpg";
-const api = "localhost:8000/api";
+
 </script>
 
 <style scoped></style>
