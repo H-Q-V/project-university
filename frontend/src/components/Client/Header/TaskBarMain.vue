@@ -62,7 +62,9 @@
             </li>
             <li class="nav-item">
               <!-- <a class="nav-link" href="#">Đăng Ký</a> -->
-              <router-link class="nav-link" to="/register">Đăng Ký</router-link>
+              <router-link class="nav-link" :to="{ name: 'Register' }"
+                >Đăng Ký</router-link
+              >
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Đăng Nhập</a>
