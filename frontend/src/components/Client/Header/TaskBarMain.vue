@@ -61,7 +61,8 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Đăng Ký</a>
+              <!-- <a class="nav-link" href="#">Đăng Ký</a> -->
+              <router-link class="nav-link" to="/register">Đăng Ký</router-link>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Đăng Nhập</a>
@@ -99,10 +100,7 @@
       </nav>
     </div>
   </div>
-  
 </template>
-
-
 
 <script setup>
 import imgTechJob from "@/assets/img/techjobs_bgb.png";
