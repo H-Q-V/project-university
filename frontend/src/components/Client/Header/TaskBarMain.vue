@@ -61,10 +61,16 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Đăng Ký</a>
+              <!-- <a class="nav-link" href="#">Đăng Ký</a> -->
+              <router-link class="nav-link" :to="{ name: 'Register' }"
+                >Đăng Ký</router-link
+              >
             </li>
-            <li class="nav-item">
-              <RouterLink class="nav-link" to="/login">Đăng Nhập</RouterLink> <!-- Sử dụng RouterLink -->
+           <li class="nav-item">
+              <!-- <a class="nav-link" href="#">Đăng Nhập</a> -->
+              <router-link class="nav-link" :to="{ name: 'Login' }"
+                >Đăng Nhập</router-link
+              >
             </li>
             <li class="nav-item dropdown">
               <a
@@ -99,10 +105,7 @@
       </nav>
     </div>
   </div>
-  
 </template>
-
-
 
 <script setup>
 import imgTechJob from "@/assets/img/techjobs_bgb.png";

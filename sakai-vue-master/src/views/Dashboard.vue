@@ -36,6 +36,7 @@ const productService = new ProductService();
 
 onMounted(() => {
     productService.getProductsSmall().then((data) => (products.value = data));
+    console.log('oke');
 });
 
 const formatCurrency = (value) => {
