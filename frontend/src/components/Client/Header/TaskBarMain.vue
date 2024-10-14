@@ -66,7 +66,7 @@
                 >Đăng Ký</router-link
               >
             </li>
-            <li class="nav-item">
+           <li class="nav-item">
               <!-- <a class="nav-link" href="#">Đăng Nhập</a> -->
               <router-link class="nav-link" :to="{ name: 'Login' }"
                 >Đăng Nhập</router-link
@@ -110,7 +110,7 @@
 <script setup>
 import imgTechJob from "@/assets/img/techjobs_bgb.png";
 import { ref, onMounted } from "vue";
-
+import { RouterLink } from "vue-router";
 const menuItems = ref([]);
 onMounted(async () => {
   try {
