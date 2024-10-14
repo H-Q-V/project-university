@@ -6,11 +6,33 @@ import Search from "./components/Client/Header/seach.vue";
 import UrgentJobs from './components/Client/HomePage/UrgentJobs.vue'
 import JobCategories from './components/Client/HomePage/JobCategories.vue'
 import JobListings from './components/Client/HomePage/JobListings.vue';
+import LoginEmployees from './components/login/LoginEmployees.vue';
+//const route = useRoute(); 
+import TopEmployers from'./components/Client/HomePage/TopEmployers.vue';
+import JobBestSalary from'./components/Client/HomePage/JobBestSalary.vue';
+import New from'./components/Client/HomePage/New.vue';
 </script>
 
 <template>
-  <TaskBarMain></TaskBarMain>
-  <Banner></Banner>
+  <div>
+    
+    
+    <TaskBarMain />
+    <Banner />
+    <Search />
+    <div class="container">
+      <div class="row">
+        <UrgentJobs class="col-md-8" />
+        <JobCategories class="col-md-4" />
+      </div>
+      <div class="row">
+        <JobListings class="col-md-12" /> 
+      </div>
+    </div>
+    <TopEmployers></TopEmployers>
+    <JobBestSalary></JobBestSalary>
+    <New></New>
+  </div>
 </template>
 
 <style scoped>

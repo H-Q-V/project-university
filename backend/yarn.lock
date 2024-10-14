@@ -728,7 +728,7 @@
     webpack "5.94.0"
     webpack-node-externals "3.0.0"
 
-"@nestjs/common@^10.0.0":
+"@nestjs/common@^10.4.4":
   version "10.4.4"
   resolved "https://registry.yarnpkg.com/@nestjs/common/-/common-10.4.4.tgz#673d0eca273e1ab3a4d3ec9e212114b9f4fbf6e8"
   integrity sha512-0j2/zqRw9nvHV1GKTktER8B/hIC/Z8CYFjN/ZqUuvwayCH+jZZBhCR2oRyuvLTXdnlSmtCAg2xvQ0ULqQvzqhA==
@@ -1032,10 +1032,10 @@
   dependencies:
     undici-types "~6.19.2"
 
-"@types/node@^20.3.1":
-  version "20.16.10"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-20.16.10.tgz#0cc3fdd3daf114a4776f54ba19726a01c907ef71"
-  integrity sha512-vQUKgWTjEIRFCvK6CyriPH3MZYiYlNy0fKiEYHWbcoWLEgs4opurGGKlebrTLqdSMIbXImH6XExNiIyNUv3WpA==
+"@types/node@^22.7.5":
+  version "22.7.5"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-22.7.5.tgz#cfde981727a7ab3611a481510b473ae54442b92b"
+  integrity sha512-jML7s2NAzMWc//QSJ1a3prpk78cOPchGvXJsC3C6R6PSMoooztvRVQEz89gmBTBY1SPMaqo5teB4uNHPdetShQ==
   dependencies:
     undici-types "~6.19.2"
 
