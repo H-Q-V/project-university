@@ -1,7 +1,7 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { CreateUserDto, UserLoginDto } from 'src/module/client/user/user.dto';
-import { AdminLoginDto, CreateAdminDto } from 'src/module/admin/auth/auth.dto';
+import { AdminLoginDto, CreateAdminDto } from 'src/module/admin/user/user.dto';
 // import { IsEmail } from 'class-validator';
 
 @Controller('auth')
@@ -28,17 +28,6 @@ export class AuthController {
     };
   }
 
-  // @Post('/forgot')
-  // async forgot(@Body('email') email: string) {
-  //   await this.authService.forgotPassword(email);
-  //   return {
-  //     success: true,
-  //     code: 200,
-  //   };
-  // }
-
-  // admin
-
   @Post('/admin/register')
   async registerAdmin(@Body() body: CreateAdminDto) {
     const data = await this.authService.registerAdmin(body);
@@ -56,6 +45,16 @@ export class AuthController {
       success: true,
       code: 200,
       data,
+    };
+  }
+
+  @Get('/admin/all')
+  async getAllUser() {
+    let users = await this.authService.getAllUser();
+    return {
+      success: true,
+      code: 200,
+      data: users,
     };
   }
 }

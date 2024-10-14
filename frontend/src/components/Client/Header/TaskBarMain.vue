@@ -67,7 +67,10 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Đăng Nhập</a>
+              <!-- <a class="nav-link" href="#">Đăng Nhập</a> -->
+              <router-link class="nav-link" :to="{ name: 'Login' }"
+                >Đăng Nhập</router-link
+              >
             </li>
             <li class="nav-item dropdown">
               <a

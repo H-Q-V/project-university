@@ -103,7 +103,7 @@ const register = async () => {
   data.password = password.value;
   status.value = !status.value;
   const postUser = await axios.post(
-    `https://0f8c-2001-ee0-4a51-bc10-a175-c128-abe9-8469.ngrok-free.app/api/auth/register`,
+    `http://localhost:3000/api/auth/register`,
     data
   );
   console.log(postUser.data);
