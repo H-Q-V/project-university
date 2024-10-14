@@ -4,8 +4,6 @@ import { User, UserSchema } from 'src/schema/user.schema';
 import { AuthController } from './auth.controller';
 import { AuthService } from './auth.service';
 import { JwtModule } from '@nestjs/jwt';
-//import { CacheModule } from '@nestjs/cache-manager';
-
 @Module({
   imports: [
     //  CacheModule.register(),
@@ -23,6 +21,7 @@ import { JwtModule } from '@nestjs/jwt';
         };
       },
     }),
+
     AuthModule,
   ],
   controllers: [AuthController],

@@ -2,11 +2,9 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { MenuModule } from './module/client/menu/menu.module';
-//import { AppController } from './app.controller';
-//import { AppService } from './app.service';
-//import { MenuModule } from './menu/menu.module';
 import { AuthModule } from './auth/auth.module';
-// import { AdminController } from './admin/admin.controller';
+import { UserModule } from './module/admin/user/user.module';
+// import { CacheModule } from '@nestjs/cache-manager';
 
 @Module({
   imports: [
@@ -14,8 +12,13 @@ import { AuthModule } from './auth/auth.module';
       envFilePath: './.env',
       isGlobal: true,
     }),
+    // CacheModule.register({
+    //   ttl: 5, // thời gian sống của cache (tính bằng giây)
+    //   max: 100, // số lượng tối đa các mục trong cache
+    // }),
     MongooseModule.forRoot(process.env.MONGO_URI),
     MenuModule,
+    UserModule,
     AuthModule,
   ],
   controllers: [],
