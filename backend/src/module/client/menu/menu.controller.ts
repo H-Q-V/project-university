@@ -19,7 +19,7 @@ export class MenuController {
   @Post('/create')
   @UsePipes(new ValidationPipe())
   async createMenu(@Body() createMenuDto: CreateMenuDto) {
-    let data = await this.menuService.create(createMenuDto);
+    const data = await this.menuService.create(createMenuDto);
     return {
       success: true,
       code: 200,
@@ -53,7 +53,7 @@ export class MenuController {
 
   @Get('getAll')
   async getMenus() {
-    let menus = await this.menuService.getMenus();
+    const menus = await this.menuService.getMenus();
     return {
       success: true,
       code: 200,

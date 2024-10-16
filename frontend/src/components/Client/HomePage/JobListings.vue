@@ -1,154 +1,73 @@
 <template>
     <div class="row">
-        <div class="col-md-12 job-board2-wrap">
-            <div class="job-board2-wrap-header">
-                <h3>Tin tuyển dụng, việc làm mới nhất</h3>
-            </div>
-            <div class="job-listings-container">
-                <div class="job-latest-group" v-for="(job, index) in paginatedJobs" :key="index">
-                    <a href="#" class="job-latest-item">
-                        <div class="job-lt-logo">
-                            <img :src="job.logo" alt="Company Logo">
-                        </div>
-                        <div class="job-lt-info">
-                            <h3>{{ job.title }}</h3>
-                            <a class="company" href="#">{{ job.company }}</a>
-                            <p class="address"><i class="fa fa-map-marker pr-1" aria-hidden="true"></i> {{ job.location }}</p>
-                            <p class="salary">Giá: {{ job.salary }}</p>
-                            <button class="apply-button">Apply Now</button>
-                        </div>
-                    </a>
-                </div>
-            </div>
-            <div class="pagination">
-                <button class="nav-button" @click="prevPage" :disabled="currentPage === 1">←</button>
-                <span>Trang {{ currentPage }} / {{ totalPages }}</span>
-                <button class="nav-button" @click="nextPage" :disabled="currentPage === totalPages">→</button>
-            </div>
+      <div class="col-md-12 job-board2-wrap">
+        <div class="job-board2-wrap-header">
+          <h3>Tin tuyển dụng, việc làm mới nhất</h3>
         </div>
+        <div class="job-listings-container">
+        
+          <div class="job-latest-group" v-for="(job, index) in paginatedJobs" :key="index">
+            <a href="#" class="job-latest-item">
+              <div class="job-lt-logo">
+                <img :src="job.logo" alt="Company Logo">
+              </div>
+              <div class="job-lt-info">
+                <h3>{{ job.title }}</h3>
+                <a class="company" href="#">{{ job.company }}</a>
+                <p class="address"><i class="fa fa-map-marker pr-1" aria-hidden="true"></i> {{ job.location }}</p>
+                <p class="salary">Giá: {{ job.salary }}</p>
+                <button class="apply-button">Apply Now</button>
+              </div>
+            </a>
+          </div>
+        </div>
+        <div class="pagination">
+          <button class="nav-button" @click="prevPage" :disabled="currentPage === 1">←</button>
+          <span>Trang {{ currentPage }} / {{ totalPages }}</span>
+          <button class="nav-button" @click="nextPage" :disabled="currentPage === totalPages">→</button>
+        </div>
+      </div>
     </div>
-</template>
+  </template>
 
-<script>
-import { ref, computed, onMounted, onUnmounted } from 'vue';
+<script setup>
+import { ref, computed, onMounted } from 'vue';
 
-export default {
-    setup() {
-        const jobs = [
-            {
-                title: "[HCM] 02 Solution Architects–Up to $2000",
-                company: "FPT Software",
-                location: "Đà Nẵng",
-                salary: "$2000", 
-                logo: '/src/assets/img/fpt-logo.png', 
-            },
-            {
-                title: "[HCM] 01 Frontend Developer–Up to $1500",
-                company: "ABC Tech",
-                location: "Hà Nội",
-                salary: "$1500", 
-                logo: '/src/assets/img/fpt-logo.png', 
-            },
-            {
-                title: "[HCM] 03 Backend Developer–Up to $1800",
-                company: "XYZ Solutions",
-                location: "Đà Nẵng",
-                salary: "$1800", 
-                logo: '/src/assets/img/fpt-logo.png', 
-            },
-            {
-                title: "[HCM] 04 UI/UX Designer–Up to $1200",
-                company: "Design Co.",
-                location: "Hồ Chí Minh",
-                salary: "$1200", 
-                logo: '/src/assets/img/fpt-logo.png', 
-            },
-            {
-                title: "[HCM] 05 Data Scientist–Up to $2500",
-                company: "Data Inc.",
-                location: "Đà Nẵng",
-                salary: "$2500", 
-                logo: '/src/assets/img/fpt-logo.png', 
-            },
-            {
-                title: "[HCM] 05 Data Scientist–Up to $2500",
-                company: "Data Inc.",
-                location: "Đà Nẵng",
-                salary: "$2500", 
-                logo: '/src/assets/img/fpt-logo.png', 
-            },
-            {
-                title: "[HCM] 05 Data Scientist–Up to $2500",
-                company: "Data Inc.",
-                location: "Đà Nẵng",
-                salary: "$2500", 
-                logo: '/src/assets/img/fpt-logo.png', 
-            },
-            {
-                title: "[HCM] 05 Data Scientist–Up to $2500",
-                company: "Data Inc.",
-                location: "Đà Nẵng",
-                salary: "$2500", 
-                logo: '/src/assets/img/fpt-logo.png', 
-            },
-            {
-                title: "[HCM] 05 Data Scientist–Up to $2500",
-                company: "Data Inc.",
-                location: "Đà Nẵng",
-                salary: "$2500", 
-                logo: '/src/assets/img/fpt-logo.png', 
-            },
-        ];
+const jobs = ref([]);
+onMounted(async () => {
+  try {
+    const res = await fetch('http://localhost:3000/api/jobs/getAll');
+    const data = await res.json();
+    jobs.value = data.data; 
+  } catch (error) {
+    console.error('Error fetching jobs:', error);
+  }
+});
+const currentPage = ref(1);
+const itemsPerPage = 6;
 
-        const currentPage = ref(1);
-        const itemsPerPage = 6; 
-        const totalPages = computed(() => Math.ceil(jobs.length / itemsPerPage));
+const totalPages = computed(() => Math.ceil(jobs.value.length / itemsPerPage));
 
-        const paginatedJobs = computed(() => {
-            const start = (currentPage.value - 1) * itemsPerPage;
-            return jobs.slice(start, start + itemsPerPage);
-        });
+const paginatedJobs = computed(() => {
+  const start = (currentPage.value - 1) * itemsPerPage;
+  return jobs.value.slice(start, start + itemsPerPage);
+});
 
-        const nextPage = () => {
-            if (currentPage.value < totalPages.value) {
-                currentPage.value++;
-            } else {
-                currentPage.value = 1; 
-            }
-        };
+const nextPage = () => {
+  if (currentPage.value < totalPages.value) {
+    currentPage.value++;
+  }
+};
 
-        const prevPage = () => {
-            if (currentPage.value > 1) {
-                currentPage.value--;
-            } else {
-                currentPage.value = totalPages.value; 
-            }
-        };
+const prevPage = () => {
+  if (currentPage.value > 1) {
+    currentPage.value--;
+  }
+};
 
-       
-        let intervalId;
 
-        onMounted(() => {
-            intervalId = setInterval(() => {
-                nextPage();
-            }, 5000); 
-        });
-
-        onUnmounted(() => {
-            clearInterval(intervalId); 
-        });
-
-        return {
-            jobs,
-            paginatedJobs,
-            currentPage,
-            totalPages,
-            nextPage,
-            prevPage
-        };
-    }
-}
 </script>
+
 
 <style scoped>
 .job-board2-wrap {

@@ -5,7 +5,7 @@ import { MenuModule } from './module/client/menu/menu.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './module/admin/user/user.module';
 // import { CacheModule } from '@nestjs/cache-manager';
-
+import { JobModule } from './module/client/job/job.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -20,6 +20,7 @@ import { UserModule } from './module/admin/user/user.module';
     MenuModule,
     UserModule,
     AuthModule,
+    JobModule,
   ],
   controllers: [],
   providers: [],
