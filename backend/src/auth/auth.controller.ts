@@ -57,4 +57,14 @@ export class AuthController {
       data: users,
     };
   }
+
+  @Post('/verify-otp')
+  async verifyOtp(@Body() body: { otp: string }) {
+    const data = await this.authService.verifyOtp(body.otp);
+    return {
+      success: true,
+      code: 200,
+      data,
+    };
+  }
 }

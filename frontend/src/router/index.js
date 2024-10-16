@@ -4,6 +4,7 @@ import layoutAccuracy from "@/layouts/layoutAccuracy.vue";
 //views
 import Register from "@/components/Client/Accuracy/Register.vue";
 import Login from "@/components/Client/Accuracy/Login.vue";
+import Otp from "@/components/Client/Accuracy/Otp.vue";
 import Main from "@/views/Main.vue";
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -13,14 +14,6 @@ const router = createRouter({
       name: "home",
       component: Main,
     },
-    // {
-    //   path: "/about",
-    //   name: "about",
-    //   // route level code-splitting
-    //   // this generates a separate chunk (About.[hash].js) for this route
-    //   // which is lazy-loaded when the route is visited.
-    //   component: () => import("../views/AboutView.vue"),
-    // },
     {
       path: "/accuracy",
       name: "accuracy",
@@ -28,6 +21,7 @@ const router = createRouter({
       children: [
         { path: "", name: "Login", component: Login },
         { path: "register", name: "Register", component: Register },
+        { path: "otp", name: "Otp", component: Otp },
       ],
     },
   ],

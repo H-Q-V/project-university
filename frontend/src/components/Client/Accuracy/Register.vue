@@ -110,7 +110,7 @@ const register = async () => {
   if (postUser.data.success) {
     Toast.success("Đăng ký thành công");
     status.value = !status.value;
-    router.push({ name: "Login" });
+    router.push({ name: "Otp" });
   }
 };
 </script>
