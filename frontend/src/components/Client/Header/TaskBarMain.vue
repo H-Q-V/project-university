@@ -52,7 +52,6 @@
 <script setup>
 import imgTechJob from "@/assets/img/techjobs_bgb.png";
 import { ref, onMounted } from "vue";
-
 const nameUser = ref("");
 const menuItems = ref([]);
 const isLogin = ref(false);

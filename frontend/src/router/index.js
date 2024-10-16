@@ -6,6 +6,8 @@ import Register from "@/components/Client/Accuracy/Register.vue";
 import Login from "@/components/Client/Accuracy/Login.vue";
 import Otp from "@/components/Client/Accuracy/Otp.vue";
 import Main from "@/views/Main.vue";
+import App from "@/App.vue";
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [

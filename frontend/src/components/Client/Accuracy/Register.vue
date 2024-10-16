@@ -43,6 +43,8 @@
                 />
               </div>
             </div>
+           
+          
             <RouterLink
               :to="{ name: 'Login' }"
               class="fg-login d-inline-block"
@@ -79,13 +81,13 @@ import router from "@/router";
 const username = ref(null);
 const email = ref(null);
 const password = ref(null);
-
 const status = ref(false);
 
 const data = {
   name: "",
   email: "",
   password: "",
+  
 };
 
 const register = async () => {
