@@ -8,7 +8,7 @@ import { CreateMenuDto } from './menu.dto';
 export class MenuService {
   constructor(@InjectModel(Menu.name) private menuModel: Model<Menu>) {}
   async create(createMenu: CreateMenuDto): Promise<any> {
-    let data = await this.menuModel.create(createMenu);
+    const data = await this.menuModel.create(createMenu);
     if (!data) {
       throw new NotFoundException('Failed to create menu');
     }
@@ -16,7 +16,7 @@ export class MenuService {
   }
 
   async update(id: string, body): Promise<any> {
-    let update = await this.menuModel.updateOne(
+    const update = await this.menuModel.updateOne(
       {
         _id: id,
       },
@@ -29,7 +29,7 @@ export class MenuService {
   }
 
   async delete(id: string): Promise<any> {
-    let data = await this.menuModel.findOne({
+    const data = await this.menuModel.findOne({
       _id: id,
     });
     if (!data) {
@@ -40,7 +40,7 @@ export class MenuService {
   }
 
   getMenus() {
-    let data = this.menuModel.find();
+    const data = this.menuModel.find();
     return data;
   }
 }
