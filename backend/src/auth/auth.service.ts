@@ -62,12 +62,12 @@ export class AuthService {
     }
     data.role = 'user';
 
-    const user = await this.UserModel.create(data).catch((e: any) => {
-      throw new HttpException(e.message, 400);
-    });
-
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
-
+    await cache.set(
+      `user-${otp}`,
+      { name, email, password: data.password },
+      TTL,
+    );
     await sendEmail({
       to: email,
       subject: 'Mã OTP đăng ký',
@@ -75,8 +75,35 @@ export class AuthService {
       html: `<b> Mã OTP của bạn là: ${otp}</b>`,
     });
 
-    await cache.set(`otp-${email}`, otp, TTL);
-    const token = this.JwtService.sign({ id: user._id, user: true });
+    await cache.set(`otp-${otp}`, otp, TTL);
+    return true;
+  }
+
+  async verifyOtp(otp: string): Promise<any> {
+    const cachedOtp = await cache.get(`otp-${otp}`);
+    if (!cachedOtp || cachedOtp !== otp) {
+      throw new UnauthorizedException('OTP không hợp lệ');
+    }
+
+    const cachedUser = await cache.get<{
+      name: string;
+      email: string;
+      password: string;
+    }>(`user-${otp}`);
+    if (!cachedUser) {
+      throw new NotFoundException('Người dùng không tồn tại');
+    }
+
+    const user = await this.UserModel.create({
+      name: cachedUser.name,
+      email: cachedUser.email,
+      password: cachedUser.password,
+      role: 'user',
+    }).catch((e: any) => {
+      throw new HttpException(e.message, 400);
+    });
+    await cache.del(`user-${otp}`);
+    await cache.del(`otp-${otp}`);
 
     return {
       user: {
@@ -84,7 +111,6 @@ export class AuthService {
         email: user.email,
         name: user.name,
       },
-      token,
     };
   }
 

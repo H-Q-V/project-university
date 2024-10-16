@@ -4,6 +4,7 @@ import layoutAccuracy from "@/layouts/layoutAccuracy.vue";
 //views
 import Register from "@/components/Client/Accuracy/Register.vue";
 import Login from "@/components/Client/Accuracy/Login.vue";
+import Otp from "@/components/Client/Accuracy/Otp.vue";
 import Main from "@/views/Main.vue";
 import App from "@/App.vue";
 
@@ -13,19 +14,18 @@ const router = createRouter({
     {
       path: "/",
       name: "home",
-      component:Main ,
+      component: Main,
     },
     {
-      path: "/login",
-      name: "Login",
-      component:Login ,
+      path: "/accuracy",
+      name: "accuracy",
+      component: layoutAccuracy,
+      children: [
+        { path: "", name: "Login", component: Login },
+        { path: "register", name: "Register", component: Register },
+        { path: "otp", name: "Otp", component: Otp },
+      ],
     },
-    {
-      path: "/Register",
-      name: "Register",
-      component:Register ,
-    },
-   
   ],
 });
 
