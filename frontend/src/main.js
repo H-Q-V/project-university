@@ -5,7 +5,7 @@ import "./style.css";
 import "./select.css";
 import "./bootstrap.css";
 // import { createPinia } from "pinia";'.use(createPinia());
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css";
 const app = createApp(App);
 
 app.use(router);

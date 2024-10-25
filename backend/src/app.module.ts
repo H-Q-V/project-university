@@ -5,6 +5,8 @@ import { MenuModule } from './module/client/menu/menu.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './module/admin/user/user.module';
 import { JobModule } from './module/client/job/job.module';
+import { PayosModule } from './module/client/Payos/payos.module';
+import { PassportModule } from '@nestjs/passport';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -16,6 +18,8 @@ import { JobModule } from './module/client/job/job.module';
     UserModule,
     AuthModule,
     JobModule,
+    PayosModule,
+    PassportModule,
   ],
   controllers: [],
   providers: [],

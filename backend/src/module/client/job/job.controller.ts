@@ -6,20 +6,24 @@ import {
   Param,
   Post,
   Put,
+  Request,
+  UseGuards,
   UsePipes,
   ValidationPipe,
 } from '@nestjs/common';
 import { JobService } from './job.service';
 import { JobDto } from './job.dto';
+import { AuthGuard } from '@nestjs/passport';
+import { CreatorGuard } from 'src/auth/creator.guard';
 
 @Controller('jobs')
 export class JobController {
   constructor(private jobService: JobService) {}
 
   @Post('/create')
-  @UsePipes(new ValidationPipe())
-  async createJob(@Body() jobDto: JobDto) {
-    const data = await this.jobService.create(jobDto);
+  @UseGuards(AuthGuard(), CreatorGuard)
+  async createJob(@Body() jobDto: JobDto, @Request() req: any) {
+    const data = await this.jobService.create(jobDto, req.creator);
     return {
       success: true,
       code: 200,

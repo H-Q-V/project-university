@@ -24,6 +24,11 @@ const router = createRouter({
                     component: () => import('@/views/pages/authnew/User.vue')
                 },
                 {
+                    path: '/jobs',
+                    name: 'jobs',
+                    component: () => import('@/views/pages/jobs/Jobs.vue')
+                },
+                {
                     path: '/uikit/formlayout',
                     name: 'formlayout',
                     component: () => import('@/views/uikit/FormLayout.vue')

@@ -123,7 +123,8 @@ export class AuthService {
     if (!user) {
       throw new UnauthorizedException('Invalid Email or Password');
     }
-    if (!password) {
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
       throw new UnauthorizedException('Invalid Email or Password');
     }
     const token = await this.JwtService.sign({ id: user._id, user: true });
@@ -170,7 +171,10 @@ export class AuthService {
     const user = await this.UserModel.create(data).catch((e: any) => {
       throw new HttpException(e.message, 400);
     });
-    const token = await this.JwtService.sign({ id: user._id, user: true });
+    const token = await this.JwtService.sign(
+      { id: user._id, user: true },
+      // { secret: process.env.JWT_SECRET, expiresIn: '30d' },
+    );
     return {
       user: {
         id: user._id,
@@ -191,8 +195,9 @@ export class AuthService {
       throw new UnauthorizedException('Invalid Email or Pasword');
     }
 
-    if (!password) {
-      throw new UnauthorizedException('Invalid Email or Pasword');
+    const isPasswordValid = await bcrypt.compare(password, user.password);
+    if (!isPasswordValid) {
+      throw new UnauthorizedException('Invalid Email or Password');
     }
 
     const token = await this.JwtService.sign({ id: user._id, user: true });
