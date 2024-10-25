@@ -4,16 +4,25 @@ import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { Job } from 'src/schema/job.schema';
 import { JobDto } from './job.dto';
+import { Coin } from 'src/schema/coin.schema';
 
 @Injectable()
 export class JobService {
-  constructor(@InjectModel(Job.name) private jobModel: Model<Job>) {}
+  constructor(
+    @InjectModel(Job.name) private jobModel: Model<Job>,
+    @InjectModel(Coin.name) private coinModel: Model<Coin>,
+  ) {}
 
-  async create(jobDto: JobDto): Promise<Job> {
+  async create(jobDto: JobDto, user: any): Promise<Job> {
     const data = await this.jobModel.create(jobDto);
     if (!data) {
       throw new NotFoundException('Failed to create job');
     }
+    const userId = await this.coinModel.findOne({ User: user.id });
+    await this.coinModel.updateOne(
+      { User: userId.User },
+      { coins: (Number(userId.coins) - 2000).toString() },
+    );
     return data;
   }
 

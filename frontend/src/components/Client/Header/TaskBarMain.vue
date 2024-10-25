@@ -38,7 +38,7 @@
             </ul>
             <li class="button-auth" v-else>
               <span class="user-info">Xin chào, {{ nameUser }}</span>
-              <div class="btn-logout" @click="logout">
+              <div class="btn-logout" @click="confirmLogout">
                 <i class="fa fa-sign-out sign-out-icon" aria-hidden="true"></i>
               </div>
             </li>
@@ -55,6 +55,16 @@ import { ref, onMounted } from "vue";
 const nameUser = ref("");
 const menuItems = ref([]);
 const isLogin = ref(false);
+import router from "@/router";
+
+const confirmLogout = () => {
+  if (confirm("Bạn có chắc chắn muốn thoát không?")) {
+    localStorage.removeItem("token");
+    localStorage.removeItem("name");
+    router.push({ name: "Login" });
+  }
+};
+
 onMounted(async () => {
   if (localStorage.getItem("token")) {
     isLogin.value = true;
