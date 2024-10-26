@@ -20,4 +20,12 @@ export class JobDto {
   @IsString()
   @IsNotEmpty()
   logo: string;
+
+  @IsString()
+  @IsNotEmpty()
+  benefits: string;
+
+  @IsString()
+  @IsNotEmpty()
+  jobDescription: string;
 }
