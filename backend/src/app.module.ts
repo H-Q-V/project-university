@@ -7,6 +7,7 @@ import { UserModule } from './module/admin/user/user.module';
 import { JobModule } from './module/client/job/job.module';
 import { PayosModule } from './module/client/Payos/payos.module';
 import { PassportModule } from '@nestjs/passport';
+import { RevenueModule } from './module/admin/revenue/revenue.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -20,6 +21,7 @@ import { PassportModule } from '@nestjs/passport';
     JobModule,
     PayosModule,
     PassportModule,
+    RevenueModule,
   ],
   controllers: [],
   providers: [],
