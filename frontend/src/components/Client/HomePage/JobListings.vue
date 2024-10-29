@@ -16,8 +16,7 @@
                 <a class="company" href="#">{{ job.company }}</a>
                 <p class="address"><i class="fa fa-map-marker pr-1" aria-hidden="true"></i> {{ job.location }}</p>
                 <p class="salary">Giá: {{ job.salary }}</p>
-                <button class="apply-button">Apply Now</button>
-              </div>
+                <button class="apply-button" @click.stop="openJdPage(job)">Apply Now</button>              </div>
             </a>
           </div>
         </div>
@@ -32,6 +31,8 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
+const router = useRouter();
 
 const jobs = ref([]);
 onMounted(async () => {
@@ -39,10 +40,24 @@ onMounted(async () => {
     const res = await fetch('http://localhost:3000/api/jobs/getAll');
     const data = await res.json();
     jobs.value = data.data; 
+    console.log('Jobs data:', jobs.value);
   } catch (error) {
     console.error('Error fetching jobs:', error);
   }
 });
+const openJdPage = (job) => {
+  console.log('Job object:', job); 
+  if (job && job._id) {
+    router.push({ 
+      name: 'jd-page', 
+      params: { id: job._id.toString() },
+      state: { jobDetails: job }  
+    });
+  } else {
+    console.error('Job or Job ID is undefined', job);
+  }
+};
+
 const currentPage = ref(1);
 const itemsPerPage = 6;
 

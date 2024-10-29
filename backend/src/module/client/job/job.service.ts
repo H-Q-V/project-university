@@ -1,4 +1,3 @@
-// module/job/job.service.ts
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -53,5 +52,13 @@ export class JobService {
   async getJobs(): Promise<Job[]> {
     const data = await this.jobModel.find().exec();
     return data;
+  }
+
+  async getJobById(id: string): Promise<Job> {
+    const job = await this.jobModel.findById(id).exec();
+    if (!job) {
+      throw new NotFoundException(`Job with ID ${id} not found`);
+    }
+    return job;
   }
 }

@@ -28,4 +28,8 @@ export class JobDto {
   @IsString()
   @IsNotEmpty()
   jobDescription: string;
+
+  @IsString()
+  @IsNotEmpty()
+  jobRequest: string;
 }
