@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  NotFoundException,
   Param,
   Post,
   Put,
@@ -62,6 +63,18 @@ export class JobController {
       success: true,
       code: 200,
       data: jobs,
+    };
+  }
+  @Get(':id')
+  async getJobById(@Param('id') id: string) {
+    const job = await this.jobService.getJobById(id);
+    if (!job) {
+      throw new NotFoundException(`Job with ID ${id} not found`);
+    }
+    return {
+      success: true,
+      code: 200,
+      data: job,
     };
   }
 }

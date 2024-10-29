@@ -1,5 +1,5 @@
 <script setup>
-import { RouterLink, RouterView } from "vue-router";
+import { RouterLink, RouterView  } from "vue-router";
 import TaskBarMain from "./components/Client/Header/TaskBarMain.vue";
 import Banner from "./components/Client/Header/Banner.vue";
 import Search from "./components/Client/Header/seach.vue";
@@ -15,9 +15,12 @@ import New from "./components/Client/HomePage/New.vue";
   <div>
     <RouterView />
   </div>
+ 
 </template>
 
 <style scoped>
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,700i,900,900i&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto+Condensed:300,300i,400,400i,700,700i&display=swap');
 header {
   line-height: 1.5;
   max-height: 100vh;
