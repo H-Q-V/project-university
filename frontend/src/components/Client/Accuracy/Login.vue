@@ -102,7 +102,6 @@ const register = async () => {
 
 <style scoped>
 .register-container {
-  /* Add your styles here */
 }
 .form-register {
   justify-content: center;

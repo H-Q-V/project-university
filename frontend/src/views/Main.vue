@@ -9,13 +9,10 @@ import JobListings from "@/components/Client/HomePage/JobListings.vue";
 import TopEmployers from "@/components/Client/HomePage/TopEmployers.vue";
 import JobBestSalary from "@/components/Client/HomePage/JobBestSalary.vue";
 import New from "@/components/Client/HomePage/New.vue";
-import JdPage from "@/components/Client/jd-page/Jd-Page.vue"
-
+import JdPage from "@/components/Client/jd-page/Jd-Page.vue";
 </script>
 
 <template>
-
-
   <TaskBarMain />
   <Banner />
   <Search />
@@ -31,7 +28,6 @@ import JdPage from "@/components/Client/jd-page/Jd-Page.vue"
   <TopEmployers></TopEmployers>
   <JobBestSalary></JobBestSalary>
   <New></New>
-
 </template>
 
 <style scoped>
