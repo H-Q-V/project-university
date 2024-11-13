@@ -8,6 +8,7 @@ import { JobModule } from './module/client/job/job.module';
 import { PayosModule } from './module/client/Payos/payos.module';
 import { PassportModule } from '@nestjs/passport';
 import { RevenueModule } from './module/admin/revenue/revenue.module';
+import { ApplyModule } from './module/client/apply/apply.module';
 @Module({
   imports: [
     ConfigModule.forRoot({
@@ -22,6 +23,7 @@ import { RevenueModule } from './module/admin/revenue/revenue.module';
     PayosModule,
     PassportModule,
     RevenueModule,
+    ApplyModule,
   ],
   controllers: [],
   providers: [],

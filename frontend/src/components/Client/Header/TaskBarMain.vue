@@ -37,7 +37,19 @@
               </li>
             </ul>
             <li class="button-auth" v-else>
-              <span class="user-info">Xin chào, {{ nameUser }}</span>
+              <div class="bt-au-em">
+                <RouterLink
+                  class="nav-link btn-employers"
+                  :to="{ name: 'recruitment' }"
+                  tabindex="-1"
+                  aria-disabled="true"
+                >
+                  Nhà Tuyển Dụng
+                </RouterLink>
+              </div>
+              <div class="bt-au-span">
+                <span class="user-info">Xin chào, {{ nameUser }}</span>
+              </div>
               <div class="btn-logout" @click="confirmLogout">
                 <i class="fa fa-sign-out sign-out-icon" aria-hidden="true"></i>
               </div>
@@ -97,5 +109,32 @@ onMounted(async () => {
 }
 .user-info {
   color: white; /* Thay đổi màu chữ thành trắng */
+}
+
+.button-auth {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+.btn-employers {
+  font-weight: bold;
+  font-size: 1rem;
+  text-decoration: none;
+  color: #339af0; /* Màu chữ cho nút */
+}
+
+.btn-employers:hover {
+  color: #004a9c !important;
+}
+
+.btn-logout {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  padding: 5px;
+  transition: background-color 0.3s;
 }
 </style>

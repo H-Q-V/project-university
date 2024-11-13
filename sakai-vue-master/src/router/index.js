@@ -29,6 +29,16 @@ const router = createRouter({
                     component: () => import('@/views/pages/jobs/Jobs.vue')
                 },
                 {
+                    path: '/apply',
+                    name: 'apply',
+                    component: () => import('@/views/pages/apply/Applys.vue')
+                },
+                {
+                    path: '/pay',
+                    name: 'pay',
+                    component: () => import('@/views/pages/pay/Pay.vue')
+                },
+                {
                     path: '/uikit/formlayout',
                     name: 'formlayout',
                     component: () => import('@/views/uikit/FormLayout.vue')

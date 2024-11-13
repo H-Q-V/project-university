@@ -2,8 +2,11 @@ import {
   All,
   Body,
   Controller,
+  Delete,
   Get,
+  Param,
   Post,
+  Put,
   Request,
   Res,
   UseGuards,
@@ -13,6 +16,7 @@ import {
 import { PayosService } from './payos.service';
 import { AuthGuard } from '@nestjs/passport';
 import { CreatorGuard } from 'src/auth/creator.guard';
+import { Code } from 'mongodb';
 // import { Request } from 'express';
 // import { UsersGuard } from 'src/auth/user.guard';
 
@@ -50,6 +54,36 @@ export class PayosController {
       success: true,
       code: 200,
       data: data,
+    };
+  }
+
+  @Get('/getAllCoin')
+  async GetAll() {
+    const data = await this.payosService.getAllCoin();
+    return {
+      success: true,
+      code: 200,
+      data: data,
+    };
+  }
+
+  @Put('/update/:id')
+  async update(@Param('id') id: string, @Body() body) {
+    const data = await this.payosService.UpdatePay(id, body);
+    return {
+      success: true,
+      code: 200,
+      data: data,
+    };
+  }
+
+  @Delete('/delete/:id')
+  async delete(@Param('id') id: string) {
+    await this.payosService.DeletePay(id);
+    return {
+      success: true,
+      code: 200,
+      message: 'delete successfuly',
     };
   }
 }

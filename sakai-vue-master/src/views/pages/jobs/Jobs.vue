@@ -186,12 +186,12 @@ const deleteJobs = async (productId) => {
                 {{ slotProps.data.logo }}
             </template>
         </Column>
-        <Column headerStyle="min-width:10rem;">
+        <!-- <Column headerStyle="min-width:10rem;">
             <template #body="slotProps">
                 <Button icon="pi pi-pencil" class="mr-2" severity="success" rounded @click="open(slotProps.data)" />
                 <Button icon="pi pi-trash" class="mt-2" severity="warning" rounded @click="confirm($event, slotProps.data)" />
             </template>
-        </Column>
+        </Column> -->
         <Column field="benefits" header="Benefits" :sortable="true" headerStyle="width:14%; min-width:10rem;">
             <template #body="slotProps">
                 <span class="p-column-title">Benefits</span>
@@ -214,6 +214,12 @@ const deleteJobs = async (productId) => {
                 <span class="truncate-text" v-tooltip.top="slotProps.data.jobRequest">
                     {{ slotProps.data.jobRequest }}
                 </span>
+            </template>
+        </Column>
+        <Column headerStyle="min-width:10rem;">
+            <template #body="slotProps">
+                <Button icon="pi pi-pencil" class="mr-2" severity="success" rounded @click="open(slotProps.data)" />
+                <Button icon="pi pi-trash" class="mt-2" severity="warning" rounded @click="confirm($event, slotProps.data)" />
             </template>
         </Column>
     </DataTable>

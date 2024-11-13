@@ -1,4 +1,10 @@
-import { Body, Injectable, Res, UnauthorizedException } from '@nestjs/common';
+import {
+  Body,
+  Injectable,
+  NotFoundException,
+  Res,
+  UnauthorizedException,
+} from '@nestjs/common';
 const PayOS = require('@payos/node');
 import { ConfigService } from '@nestjs/config';
 import { InjectModel } from '@nestjs/mongoose';
@@ -31,8 +37,8 @@ export class PayosService {
       amount: body.amount,
       description: `${desc}`,
       orderCode: codePay,
-      returnUrl: `http://localhost:5173/`,
-      cancelUrl: `http://localhost:5173/`,
+      returnUrl: `http://localhost:5173/recruitment`,
+      cancelUrl: `http://localhost:5173/recruitment`,
     };
     await this.payosModel.create({
       User: username._id,
@@ -73,8 +79,38 @@ export class PayosService {
       return paymentInfo;
     }
   }
+
   async Coin(user: any) {
     const data = this.coinModel.findOne({ User: user.id });
     return data;
+  }
+
+  async getAllCoin() {
+    const data = this.payosModel.find({
+      Status: 'confirmed',
+    });
+    return data;
+  }
+
+  async UpdatePay(id: string, body): Promise<any> {
+    const update = await this.payosModel.updateOne(
+      {
+        _id: id,
+      },
+      body,
+    );
+    if (update.modifiedCount === 0) {
+      throw new NotFoundException('apply not found');
+    }
+    return update;
+  }
+
+  async DeletePay(id: string) {
+    const data = await this.payosModel.findOne({ _id: id });
+    if (!data) {
+      throw new NotFoundException('apply not found');
+    }
+    await this.payosModel.deleteOne({ _id: id });
+    return true;
   }
 }
