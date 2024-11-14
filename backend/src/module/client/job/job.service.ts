@@ -1,6 +1,6 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
-import { Model } from 'mongoose';
+import { Model,isValidObjectId  } from 'mongoose';
 import { Job } from 'src/schema/job.schema';
 import { JobDto } from './job.dto';
 import { Coin } from 'src/schema/coin.schema';
@@ -60,10 +60,40 @@ export class JobService {
   }
 
   async getJobById(id: string): Promise<Job> {
+    if (!isValidObjectId(id)) {
+      throw new BadRequestException('Invalid Job ID');
+    }
     const job = await this.jobModel.findById(id).exec();
     if (!job) {
       throw new NotFoundException(`Job with ID ${id} not found`);
     }
     return job;
+  }
+  async getAllProgrammingLanguages(): Promise<Job[]> {
+    const languages = await this.jobModel.distinct('programmingLanguages');
+    return languages;
+}
+
+  async searchJobs({keyword,language,location}:{keyword:string ;language:string;location:string}) {
+    const filter: any = {};
+
+    
+    if (language) {
+      filter.programmingLanguages = language;
+    }
+    
+    if (location) {
+      filter.location = location;
+    }
+    
+    if (keyword) {
+      filter.$or = [
+        { title: { $regex: keyword, $options: 'i' } },
+        { company: { $regex: keyword, $options: 'i' } },
+        { jobDescription: { $regex: keyword, $options: 'i' } }
+      ];
+    }
+    
+    return this.jobModel.find(filter).exec();
   }
 }

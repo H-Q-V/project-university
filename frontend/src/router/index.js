@@ -8,6 +8,7 @@ import Otp from "@/components/Client/Accuracy/Otp.vue";
 import Main from "@/views/Main.vue";
 import App from "@/App.vue";
 import JdPage from "@/components/Client/jd-page/Jd-Page.vue";
+import Search from "@/components/Client/search/Search.vue"; 
 import Recruitment from "@/views/Recruitment.vue";
 import Payment from "../views/Payment.vue";
 import Apply from "../views/Apply.vue";
@@ -36,6 +37,10 @@ const router = createRouter({
       ],
     },
     {
+      path: "/search", 
+      name: "Search", 
+      component: Search 
+    },
       path: "/recruitment",
       name: "recruitment",
       component: Recruitment,

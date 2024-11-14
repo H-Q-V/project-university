@@ -24,21 +24,16 @@
               </div>
               <div class="job-detail-header-de">
                 <ul>
-                  <li>
-                    <i class="fa fa-map-marker icn-jd"></i
-                    ><span>{{ jobDetails.location }}</span>
-                  </li>
-                  <li>
-                    <i class="fa fa-usd icn-jd"></i
-                    ><span>{{ jobDetails.salary }}</span>
-                  </li>
-                  <li>
-                    <i class="fa fa-calendar icn-jd"></i><span>15/01/2019</span>
-                  </li>
+                  <li><i class="fa fa-map-marker icn-jd"></i><span>{{ jobDetails.location }}</span></li>
+                  <li><i class="fa fa-usd icn-jd"></i><span>{{ jobDetails.x }}</span></li>
+                  <li><i class="fa fa-calendar icn-jd"></i><span>15/01/2019</span></li>
                 </ul>
               </div>
               <div class="job-detail-header-tag">
                 <ul>
+                  <li v-for="(language, index) in jobDetails.programmingLanguages" :key="index">
+                    <a href="#">{{ language }}</a>
+                  </li>
                   <li><a href="#">Java</a></li>
                   <li><a href="#">.NET</a></li>
                   <li><a href="#">SQL</a></li>

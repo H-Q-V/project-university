@@ -1,18 +1,17 @@
 <template>
-  <div class="col-md-8 col-sm-12 col-12 clear-left">
-    <div class="main-wrapper">
-      <h2 class="widget-title">
-        <span>Phúc lợi</span>
-      </h2>
-      <!-- content -->
-      <!-- <div class="welfare-wrap">
-        <div class="row">
-          <div class="welfare-list">
-            <ul>
-              <li v-for="(benefit, index) in benefitsList" :key="index">
-                <p>
-                  <i class="fa fa-check-circle icn-welfare"></i>{{ benefit }}
-                </p>
+    <div class="col-md-8 col-sm-12 col-12 clear-left">
+      <div class="main-wrapper">
+        <h2 class="widget-title">
+            <span>Phúc lợi</span>
+          </h2>
+          <!-- content -->
+          <div class="welfare-wrap">
+            <div class="row">
+              <div class="welfare-list">
+                <ul>
+                  <li v-for="(benefit, index) in jobDetails.benefits" :key="index">
+                <p><i class="fa fa-check-circle icn-welfare"></i>{{ benefit }}</p>
+
               </li>
             </ul>
           </div>

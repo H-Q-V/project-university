@@ -17,26 +17,29 @@
                 <div class="row">
                   <div class="col-md-5">
                     <div class="input-group s-input-group">
-                      <input type="text" class="form-control sinput" placeholder="Nhập kỹ năng, công việc,...">
+                      <input 
+                        type="text" 
+                        class="form-control sinput" 
+                        placeholder="Nhập kỹ năng, công việc,..."
+                        v-model="searchQuery.keyword"
+                      >
                       <span><i class="fa fa-search"></i></span>
                     </div>
                   </div>
                   <div class="col-md-4">
-                    <select class="form-control">
-                      <option value="" selected hidden>Tất cả ngôn ngữ</option>
-                      <option>Java</option>
-                      <option>.NET</option>
-                      <option>Javascript</option>
-                      <option>Php</option>
-                      <option>Python</option>
+                    <select class="form-control" v-model="searchQuery.language">
+                      <option value="">Tất cả ngôn ngữ</option>
+                      <option v-for="lang in languages" :key="lang" :value="lang">
+                        {{ lang }}
+                      </option>
                     </select>
                   </div>
                   <div class="col-md-3">
-                    <select class="form-control">
-                      <option value="" selected hidden>Tất cả địa điểm</option>
-                      <option>Hà Nội</option>
-                      <option>Hồ Chí Minh</option>
-                      <option>Đà Nẵng</option>
+                    <select class="form-control" v-model="searchQuery.location">
+                      <option value="">Tất cả địa điểm</option>
+                      <option v-for="loc in locations" :key="loc" :value="loc">
+                        {{ loc }}
+                      </option>
                     </select>
                   </div>
                 </div>
@@ -48,39 +51,107 @@
           </form>
         </div>
         <div class="tab-pane stab-pane fade" :class="{ 'show active': activeTab === 'profile' }" id="profile" role="tabpanel">
-           <form class="bn-search-form" @submit.prevent="handleSearch">
-             <div class="row">
-               <div class="col-md-10 col-sm-12">
-                 <div class="input-group s-input-group w-100">
-                   <input type="text" class="form-control sinput" placeholder="Nhập tên công ty...">
-                   <span><i class="fa fa-search"></i></span>
-                 </div>
-               </div>
-               <div class="col-md-2 col-sm-12">
-                 <button type="submit" class="btn btn-primary btn-search col-sm-12">Tìm kiếm</button>
-               </div>
-             </div>
-           </form> 
-         </div>
+          <form class="bn-search-form" @submit.prevent="handleCompanySearch">
+            <div class="row">
+              <div class="col-md-10 col-sm-12">
+                <div class="input-group s-input-group w-100">
+                  <input 
+                    type="text" 
+                    class="form-control sinput" 
+                    placeholder="Nhập tên công ty..."
+                    v-model="companyQuery"
+                  >
+                  <span><i class="fa fa-search"></i></span>
+                </div>
+              </div>
+              <div class="col-md-2 col-sm-12">
+                <button type="submit" class="btn btn-primary btn-search col-sm-12">Tìm kiếm</button>
+              </div>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   </div>
 </template>
-  <script>
-export default {
-  data() {
-    return { activeTab: 'home' };
-  },
-  methods: {
-    setActiveTab(tab) {
-      this.activeTab = tab;
-    },
-    handleSearch() {
+
+
+
+<script setup>
+import { ref, onMounted ,defineEmits} from 'vue';
+import { useRouter } from 'vue-router'; // Import useRouter
+
+const emit = defineEmits(); // Định nghĩa emit
+const router = useRouter(); // Khởi tạo router
+
+const activeTab = ref('home');
+const languages = ref([]);
+const locations = ref([ 'Hồ Chí Minh', 'Đà Nẵng']);
+const searchQuery = 
+ref({
+  keyword: '',
+  language: '',
+  location: ''
+});
+const companyQuery = ref('');
+
+
+onMounted(async () => {
+  try {
+    const res = await fetch('http://localhost:3000/api/jobs/getAll');
+    const data = await res.json();
+    if (data.success) {
+      locations.value = [...new Set(data.data.map(job => job.location))];
+      languages.value = [...new Set(data.data.flatMap(job => job.programmingLanguages))];    }
+  } catch (error) {
+    console.error('Error fetching locations:', error);
+  }
+});
+
+const setActiveTab = (tab) => {
+  activeTab.value = tab;
+};
+
+const handleSearch = async () => {
+  try {
+    const params = new URLSearchParams();
+    if (searchQuery.value.keyword) params.append('keyword', searchQuery.value.keyword);
+    if (searchQuery.value.location) params.append('location', searchQuery.value.location);
+    if (searchQuery.value.language) params.append('language', searchQuery.value.language);
+
+    const res = await fetch(`http://localhost:3000/api/jobs/search?${params}`);
+    const data = await res.json();
     
-    },
-  },
+    if (data.success) {
+      router.push({ name: 'Search' });
+      emit('search-results', data.data);
+
+    }
+  } catch (error) {
+    console.error('Error searching jobs:', error);
+  }
+
+};
+
+const handleCompanySearch = async () => {
+  if (!companyQuery.value) return;
+  
+  try {
+    const res = await fetch(`http://localhost:3000/api/jobs/search?company=${companyQuery.value}`);
+    const data = await res.json();
+    
+    if (data.success) {
+      emit('search-results', data.data);
+      router.push({ name: 'Search' }); // Chuyển hướng đến trang Search.vue
+
+    }
+  } catch (error) {
+    console.error('Error searching companies:', error);
+  }
 };
 </script>
+
+
   
   <style scoped>
   .search-wrapper {
