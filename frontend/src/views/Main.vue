@@ -10,7 +10,7 @@ import TopEmployers from "@/components/Client/HomePage/TopEmployers.vue";
 import JobBestSalary from "@/components/Client/HomePage/JobBestSalary.vue";
 import New from "@/components/Client/HomePage/New.vue";
 import JdPage from "@/components/Client/jd-page/Jd-Page.vue"
-
+import Searcher from "@/components/Client/search/Search.vue"
 </script>
 
 <template>

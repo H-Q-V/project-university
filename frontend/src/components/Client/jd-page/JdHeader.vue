@@ -4,8 +4,10 @@
         <nav class="navbar navbar-expand-lg navbar-light bg-light tjnav-bar">
           <!-- <a class="navbar-brand" href="#">Navbar</a> -->
           <a href="#" class="nav-logo">
-            <img :src="logoImage" alt="TechJobs Logo">
-          </a>
+          <router-link to="/">
+          <img :src="logoImage" alt="TechJobs Logo">
+        </router-link>
+        </a>
           <button class="navbar-toggler tnavbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <!-- <span class="navbar-toggler-icon"></span> -->
             <i class="fa fa-bars icn-res" aria-hidden="true"></i>

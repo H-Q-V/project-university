@@ -9,7 +9,7 @@
             <div class="row">
               <div class="welfare-list">
                 <ul>
-                  <li v-for="(benefit, index) in benefitsList" :key="index">
+                  <li v-for="(benefit, index) in jobDetails.benefits" :key="index">
                 <p><i class="fa fa-check-circle icn-welfare"></i>{{ benefit }}</p>
               </li>
                 </ul>
@@ -62,7 +62,10 @@
   });
   
   const benefitsList = computed(() => {
-    return jobDetails.value.benefits ? jobDetails.value.benefits.split('. ') : [];
+  if (typeof jobDetails.value.benefits === 'string') {
+    return jobDetails.value.benefits.split('. ');
+  }
+  return [];
   });
   </script>
 
