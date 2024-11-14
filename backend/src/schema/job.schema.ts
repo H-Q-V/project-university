@@ -20,8 +20,9 @@ export class Job {
   @Prop({ required: true })
   logo: string;
 
-  @Prop({ required: true, type: [String] }) 
-  benefits: string[]; 
+
+  @Prop({ required: true, type: [String] })
+  benefits: string[];
 
   @Prop({ required: true })
   jobDescription: string;

@@ -13,15 +13,20 @@ export class JobService {
   ) {}
 
   async create(jobDto: JobDto, user: any): Promise<Job> {
+    const userId = await this.coinModel.findOne({ User: user.id });
+    if (!userId || Number(userId.coins) < 2000) {
+      throw new NotFoundException('Bạn cần nạp tiền để đăng bài');
+    }
+
     const data = await this.jobModel.create(jobDto);
     if (!data) {
       throw new NotFoundException('Failed to create job');
     }
-    const userId = await this.coinModel.findOne({ User: user.id });
     await this.coinModel.updateOne(
       { User: userId.User },
       { coins: (Number(userId.coins) - 2000).toString() },
     );
+
     return data;
   }
 

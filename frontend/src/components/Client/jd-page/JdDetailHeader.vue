@@ -6,17 +6,21 @@
           <div class="col-md-2 col-sm-12 col-12">
             <div class="job-detail-header-logo">
               <a href="#">
-                <img :src="jobDetails.logo" class="job-logo-ima" alt="logo công ty">
+                <img
+                  :src="jobDetails.logo"
+                  class="job-logo-ima"
+                  alt="logo công ty"
+                />
               </a>
             </div>
           </div>
           <div class="col-md-7 col-sm-12 col-12">
-          <div class="job-detail-header-desc">
+            <div class="job-detail-header-desc">
               <div class="job-detail-header-title">
-                  <a href="#">{{ jobDetails.title }}</a>
+                <a href="#">{{ jobDetails.title }}</a>
               </div>
               <div class="job-detail-header-company">
-                  <a href="#">{{ jobDetails.company }}</a>
+                <a href="#">{{ jobDetails.company }}</a>
               </div>
               <div class="job-detail-header-de">
                 <ul>
@@ -30,27 +34,33 @@
                   <li v-for="(language, index) in jobDetails.programmingLanguages" :key="index">
                     <a href="#">{{ language }}</a>
                   </li>
+                  <li><a href="#">Java</a></li>
+                  <li><a href="#">.NET</a></li>
+                  <li><a href="#">SQL</a></li>
+                  <li><a href="#">C#</a></li>
                 </ul>
               </div>
+            </div>
           </div>
-        </div>
-        <div class="col-md-3 col-sm-12 col-12">
-          <div class="jd-header-wrap-right">
-            <div class="jd-center">
-              <a href="#" class="btn btn-primary btn-apply">Nộp đơn</a>
-              <p class="jd-view">Lượt xem: <span>1.520</span></p>
+          <div class="col-md-3 col-sm-12 col-12">
+            <div class="jd-header-wrap-right">
+              <div class="jd-center">
+                <RouterLink :to="{ name: 'apply' }">
+                  <a href="#" class="btn btn-primary btn-apply">Nạp đơn</a>
+                </RouterLink>
+                <p class="jd-view">Lượt xem: <span>1.520</span></p>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    </div>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+import { ref, onMounted } from "vue";
+import { useRoute } from "vue-router";
 
 const route = useRoute();
 const jobDetails = ref({});
@@ -60,9 +70,9 @@ const fetchJobDetails = async (id) => {
     const res = await fetch(`http://localhost:3000/api/jobs/${id}`);
     const data = await res.json();
     jobDetails.value = data.data;
-    console.log('Job details:', jobDetails.value);
+    console.log("Job details:", jobDetails.value);
   } catch (error) {
-    console.error('Error fetching job details:', error);
+    console.error("Error fetching job details:", error);
   }
 };
 
@@ -70,7 +80,6 @@ onMounted(() => {
   fetchJobDetails(route.params.id);
 });
 </script>
-
 
 <style scoped>
 .job-detail-wrap {
