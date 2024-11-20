@@ -12,13 +12,16 @@ export class JobService {
     @InjectModel(Coin.name) private coinModel: Model<Coin>,
   ) {}
 
-  async create(jobDto: JobDto, user: any): Promise<Job> {
+  async create(jobDto: JobDto, user: any): Promise<Job> 
+  {
+    console.log('Job DTO:', jobDto);
+
     const userId = await this.coinModel.findOne({ User: user.id });
     if (!userId || Number(userId.coins) < 2000) {
       throw new NotFoundException('Bạn cần nạp tiền để đăng bài');
     }
 
-    const data = await this.jobModel.create(jobDto);
+    const data = await this.jobModel.create(jobDto); 
     if (!data) {
       throw new NotFoundException('Failed to create job');
     }
@@ -72,7 +75,7 @@ export class JobService {
   async getAllProgrammingLanguages(): Promise<Job[]> {
     const languages = await this.jobModel.distinct('programmingLanguages');
     return languages;
-}
+ }
 
   async searchJobs({keyword,language,location}:{keyword:string ;language:string;location:string}) {
     const filter: any = {};
@@ -96,4 +99,7 @@ export class JobService {
     
     return this.jobModel.find(filter).exec();
   }
+  async getUrgentJobs(): Promise<Job[]> {
+    return this.jobModel.find({ isUrgent: true }).exec();
+}
 }

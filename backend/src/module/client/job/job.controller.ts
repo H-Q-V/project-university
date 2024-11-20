@@ -25,13 +25,17 @@ export class JobController {
 
   @Post('/create')
   @UseGuards(AuthGuard(), CreatorGuard)
+  @UsePipes(new ValidationPipe()) 
   async createJob(@Body() jobDto: JobDto, @Request() req: any) {
     const data = await this.jobService.create(jobDto, req.creator);
     return {
       success: true,
       code: 200,
       message: 'Create job successfully',
-      data,
+      data:{ 
+        ...data,
+        isUrgent: data.isUrgent,
+      },
     };
   }
 
@@ -90,7 +94,15 @@ export class JobController {
       data: jobs,
     };
   }
-
+  @Get('/urgent')
+  async getUrgentJobs() {
+      const jobs = await this.jobService.getUrgentJobs();
+      return {
+          success: true,
+          code: 200,
+          data: jobs,
+      };
+  }
   @Get(':id')
   async getJobById(@Param('id') id: string) {
     if (!isValidObjectId(id)) {
@@ -106,4 +118,5 @@ export class JobController {
       data: job,
     };
   }
+ 
 }

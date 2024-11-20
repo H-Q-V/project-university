@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, ArrayMinSize, IsArray } from 'class-validator';
+import { IsString, IsNotEmpty, ArrayMinSize, IsArray, IsBoolean } from 'class-validator';
 
 export class JobDto {
   @IsString()
@@ -41,4 +41,7 @@ export class JobDto {
   @ArrayMinSize(1, { message: 'At least one programming language is required' })
   @IsString({ each: true })
   programmingLanguages: string[];
+
+  @IsBoolean()
+  isUrgent: boolean; 
 }
