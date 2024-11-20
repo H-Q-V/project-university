@@ -6,7 +6,7 @@
       </h2>
 
       <div class="job-group">
-        <div v-for="job in urgentJobs" :key="job.id" class="job pagi">
+        <div v-for="job in urgentJobs" :key="job._id" class="job pagi">
           <div class="job-content">
             <div class="job-logo">
               <a :href="job.companyLink">
@@ -33,8 +33,8 @@
                 </div>
                 <div class="job-salary">
                   <i class="fa fa-money" aria-hidden="true"></i>
-                  <span class="salary-min">{{ job.salaryMin }}<em class="salary-unit">triệu</em></span>
-                  <span class="salary-max">{{ job.salaryMax }} <em class="salary-unit">triệu</em></span>
+                  <!-- <span class="salary-min">{{ job.salaryMin }}<em class="salary-unit">triệu</em></span> -->
+                  <span class="salary">Giá: {{ job.salary }}</span>
                 </div>
                 <div class="job-deadline">
                   <span><i class="fa fa-clock-o" aria-hidden="true"></i> Hạn nộp: <strong>{{ job.deadline }}</strong></span>
@@ -56,65 +56,34 @@
 </template>
 
 <script>
+import axios from 'axios';
+import SlickCarousel from 'vue-slick-carousel';
+import 'vue-slick-carousel/dist/vue-slick-carousel.css';
+
 export default {
   name: 'UrgentJobs',
-      
+  components: {
+    SlickCarousel,
+  },
   data() {
     return {
-      urgentJobs: [
-        {
-          id: 1,
-          title: 'Lập trình viên Frontend',
-          company: 'Công ty ABC',
-          logo: '/src/assets/img/fpt-logo.png', 
-          link: '#',
-          companyLink: '#',
-          location: 'Hà Nội',
-          skillLink: '#',
-          mainSkill: 'Vue.js',
-          salaryMin: 15,
-          salaryMax: 25,
-          deadline: '30/06/2023',
-          applyLink: '#'
-        },
-        {
-          id: 2,
-          title: 'Kỹ sư phần mềm Backend',
-          company: 'Công ty XYZ',
-          logo: '/src/assets/img/fpt-logo.png', 
-          link: '#',
-          companyLink: '#',
-          location: 'Hồ Chí Minh',
-          skillLink: '#',
-          mainSkill: 'Node.js',
-          salaryMin: 20,
-          salaryMax: 30,
-          deadline: '15/07/2023',
-          applyLink: '#'
-        },
-        {
-          id: 2,
-          title: 'Kỹ sư phần mềm Backend',
-          company: 'Công ty XYZ',
-          logo: '/src/assets/img/fpt-logo.png', 
-          link: '#',
-          companyLink: '#',
-          location: 'Hồ Chí Minh',
-          skillLink: '#',
-          mainSkill: 'Node.js',
-          salaryMin: 20,
-          salaryMax: 30,
-          deadline: '15/07/2023',
-          applyLink: '#'
-        },
-      ]
-    }
-  }, 
-
-  created() {
-    console.log('Danh sách công việc khẩn cấp đã được tải');
-  }
-}
+      urgentJobs: [],
+    };
+  },
+  async created() {
+    await this.fetchUrgentJobs();
+  },
+  methods: {
+    async fetchUrgentJobs() {
+      try {
+        const response = await axios.get('http://localhost:3000/api/jobs/urgent'); 
+        this.urgentJobs = response.data.data; 
+      } catch (error) {
+        console.error('Error fetching urgent jobs:', error);
+      }
+    },
+  },
+};
 </script>
 
 <style scoped>

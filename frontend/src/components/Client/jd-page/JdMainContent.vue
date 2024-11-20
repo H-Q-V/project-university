@@ -5,18 +5,7 @@
             <span>Phúc lợi</span>
           </h2>
           <!-- content -->
-          <div class="welfare-wrap">
-            <div class="row">
-              <div class="welfare-list">
-                <ul>
-                  <li v-for="(benefit, index) in jobDetails.benefits" :key="index">
-                <p><i class="fa fa-check-circle icn-welfare"></i>{{ benefit }}</p>
-
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div> -->
+      
       <div class="welfare-wrap">
         <div class="row">
           <div class="welfare-list">

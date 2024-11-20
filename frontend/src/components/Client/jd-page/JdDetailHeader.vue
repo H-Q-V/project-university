@@ -34,10 +34,7 @@
                   <li v-for="(language, index) in jobDetails.programmingLanguages" :key="index">
                     <a href="#">{{ language }}</a>
                   </li>
-                  <li><a href="#">Java</a></li>
-                  <li><a href="#">.NET</a></li>
-                  <li><a href="#">SQL</a></li>
-                  <li><a href="#">C#</a></li>
+                
                 </ul>
               </div>
             </div>

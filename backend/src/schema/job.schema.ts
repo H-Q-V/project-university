@@ -32,6 +32,9 @@ export class Job {
 
   @Prop({ required: true, type: [String] }) 
   programmingLanguages: string[];
+
+  @Prop({ required: true, default: false })
+  isUrgent: boolean; 
 }
 
 export const JobSchema = SchemaFactory.createForClass(Job);

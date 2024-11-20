@@ -40,58 +40,27 @@
       >
         <div class="card-body recuitment-body">
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label text-right label"
-              >Title<span style="color: red" class="pl-2">*</span></label
-            >
+            <label class="col-sm-3 col-form-label text-right label">Title<span style="color: red" class="pl-2">*</span></label>
             <div class="col-sm-9">
-              <input
-                v-model="title"
-                type="text"
-                class="form-control"
-                placeholder="Nhập tiêu đề"
-              />
+              <input v-model="title" type="text" class="form-control" placeholder="Nhập tiêu đề" />
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label text-right label"
-              >Company<span style="color: red" class="pl-2">*</span></label
-            >
+            <label class="col-sm-3 col-form-label text-right label">Company<span style="color: red" class="pl-2">*</span></label>
             <div class="col-sm-9">
-              <textarea
-                v-model="company"
-                type="text"
-                class="form-control"
-                placeholder="Nhập yêu cầu công việc"
-                rows="5"
-              ></textarea>
+              <textarea v-model="company" class="form-control" placeholder="Nhập tên công ty" rows="5"></textarea>
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label text-right label"
-              >Location<span style="color: red" class="pl-2">*</span></label
-            >
+            <label class="col-sm-3 col-form-label text-right label">Location<span style="color: red" class="pl-2">*</span></label>
             <div class="col-sm-9">
-              <textarea
-                v-model="location"
-                type="text"
-                class="form-control"
-                placeholder="Nhập yêu cầu công việc"
-                rows="5"
-              ></textarea>
+              <textarea v-model="location" class="form-control" placeholder="Nhập địa điểm" rows="5"></textarea>
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label text-right label"
-              >Salary<span style="color: red" class="pl-2">*</span></label
-            >
+            <label class="col-sm-3 col-form-label text-right label">Salary<span style="color: red" class="pl-2">*</span></label>
             <div class="col-sm-9">
-              <textarea
-                v-model="salary"
-                type="text"
-                class="form-control"
-                placeholder="Nhập mô tả công việc"
-                rows="5"
-              ></textarea>
+              <textarea v-model="salary" class="form-control" placeholder="Nhập mức lương" rows="5"></textarea>
             </div>
           </div>
 
@@ -106,9 +75,7 @@
                   accept="image/*"
                   @change="handleFiles($event.target.files)"
                 />
-                <label style="cursor: pointer" for="fileElem"
-                  >Tải ảnh lên hoặc kéo thả vào đây</label
-                >
+                <label style="cursor: pointer" for="fileElem">Tải ảnh lên hoặc kéo thả vào đây</label>
 
                 <progress
                   id="progress-bar"
@@ -129,63 +96,37 @@
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label text-right label"
-              >benefits<span style="color: red" class="pl-2">*</span></label
-            >
+            <label class="col-sm-3 col-form-label text-right label">Benefits<span style="color: red" class="pl-2">*</span></label>
             <div class="col-sm-9">
-              <textarea
-                v-model="benefits"
-                type="text"
-                class="form-control"
-                placeholder="Nhập yêu cầu công việc"
-                rows="5"
-              ></textarea>
+              <textarea v-model="benefits" class="form-control" placeholder="Nhập lợi ích" rows="5"></textarea>
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label text-right label"
-              >obDescription<span style="color: red" class="pl-2"
-                >*</span
-              ></label
-            >
+            <label class="col-sm-3 col-form-label text-right label">Job Description<span style="color: red" class="pl-2">*</span></label>
             <div class="col-sm-9">
-              <textarea
-                v-model="obDescription"
-                type="text"
-                class="form-control"
-                placeholder="Nhập yêu cầu công việc"
-                rows="5"
-              ></textarea>
+              <textarea v-model="obDescription" class="form-control" placeholder="Nhập mô tả công việc" rows="5"></textarea>
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label text-right label"
-              >jobRequest<span style="color: red" class="pl-2">*</span></label
-            >
+            <label class="col-sm-3 col-form-label text-right label">Job Request<span style="color: red" class="pl-2">*</span></label>
             <div class="col-sm-9">
-              <textarea
-                v-model="jobRequest"
-                type="text"
-                class="form-control"
-                placeholder="Nhập yêu cầu công việc"
-                rows="5"
-              ></textarea>
+              <textarea v-model="jobRequest" class="form-control" placeholder="Nhập yêu cầu công việc" rows="5"></textarea>
             </div>
           </div>
           <div class="form-group row">
-            <label class="col-sm-3 col-form-label text-right label"
-              >Languages<span style="color: red" class="pl-2">*</span></label
-            >
+            <label class="col-sm-3 col-form-label text-right label">Languages<span style="color: red" class="pl-2">*</span></label>
             <div class="col-sm-9">
-              <textarea
-                v-model="languages"
-                type="text"
-                class="form-control"
-                placeholder="Nhập yêu cầu công việc"
-                rows="5"
-              ></textarea>
+              <textarea v-model="languages" class="form-control" placeholder="Nhập ngôn ngữ lập trình" rows="5"></textarea>
             </div>
           </div>
+
+          <div class="form-group row">
+            <label class="col-sm-3 col-form-label text-right label">Tuyển gấp</label>
+            <div class="col-sm-9">
+              <input type="checkbox" v-model="isUrgent" /> 
+            </div>
+          </div>
+
           <div class="rec-submit">
             <button
               type="submit"
@@ -203,6 +144,8 @@
     </div>
   </div>
 </template>
+
+
 <script setup>
 import { ref } from "vue";
 import imgbanner from "@/assets/img/hna2.jpg";
@@ -218,9 +161,10 @@ const jobRequest = ref("");
 const languages = ref("");
 // const logo = ref("");
 const logoUrl = ref("");
-
+const isUrgent = ref(false);
 const token = ref(localStorage.getItem("token"));
 const loading = ref(false);
+
 const handleFiles = (files) => {
   gallery.value = [];
   uploadProgress.value = 0;
@@ -238,6 +182,7 @@ const handleFiles = (files) => {
     }, 100);
   });
 };
+
 
 const fetchcreate = async () => {
   loading.value = true;
@@ -263,10 +208,11 @@ const fetchcreate = async () => {
       location: location.value,
       salary: salary.value,
       logo: logoUrl.value,
-      benefits: benefits.value,
+      benefits: benefits.value.split(','), 
       jobDescription: obDescription.value,
       jobRequest: jobRequest.value,
-      programmingLanguages: languages.value,
+      programmingLanguages: languages.value.split(','), 
+      isUrgent: isUrgent.value, 
     };
 
     const response = await fetch("http://localhost:3000/api/jobs/create", {
@@ -285,6 +231,8 @@ const fetchcreate = async () => {
     alert("Đăng tin thành công!");
   } catch (error) {
     alert("Có lỗi xảy ra khi đăng tin!");
+  }finally{
+    loading.value=false
   }
 };
 </script>

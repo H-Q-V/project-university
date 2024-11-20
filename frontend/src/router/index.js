@@ -39,8 +39,9 @@ const router = createRouter({
     {
       path: "/search", 
       name: "Search", 
-      component: Search 
+      component: Search
     },
+    {
       path: "/recruitment",
       name: "recruitment",
       component: Recruitment,
